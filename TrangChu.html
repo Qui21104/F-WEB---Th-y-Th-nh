@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="TrangChu.css">
+  
+</head>
+<body>
+    <div class="container">
+    <header class="navbar">
+        <div class="logo">U30</div>
+        <nav>
+            <ul>
+                <li><a href="#">Trang Chủ</a></li>
+                <li><a href="#">Phim Bộ</a></li>
+                <li><a href="#">Phim Lẻ</a></li>
+                <li class="dropdown">
+                    <a href="#">Thể Loại</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Hành Động</a></li>
+                        <li><a href="#">Kinh Dị</a></li>
+                        <li><a href="#">Hài Hước</a></li>
+                        <li><a href="#">Tình Cảm</a></li>
+                        <li><a href="#">Hoạt Hình</a></li>
+                        <li><a href="#">Viễn Tưởng</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Hỗ trợ</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <img src="images/pngtree-flat-user-profile-icon_ca_nhan.png" alt="User">
+            <ul class="profile-menu">
+                <li><a href="#" id="register-btn">Đăng ký</a></li>
+                <li><a href="#" id="login-btn">Đăng nhập</a></li>
+            </ul>
+        </div>
+        <div id="register-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-register">&times;</span>
+                <h2>Đăng Ký</h2>
+                <input type="text" placeholder="Tên đăng nhập">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Mật khẩu">
+                <input type="password" placeholder="Nhập lại mật khẩu">
+                <button>Đăng Ký</button>
+                <p>Bạn đã có tài khoản? <a href="#" id="switch-to-login">Đăng nhập</a></p>
+            </div>
+        </div>
+        
+        <!-- 🔹 Form Đăng Nhập -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-login">&times;</span>
+                <h2>Đăng Nhập</h2>
+                <input type="text" placeholder="Tên đăng nhập hoặc Email">
+                <input type="password" placeholder="Mật khẩu">
+                <button>Đăng Nhập</button>
+                <p>Chưa có tài khoản? <a href="#" id="switch-to-register">Đăng ký</a></p>
+            </div>
+        </div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+    const registerBtn = document.getElementById("register-btn");
+    const loginBtn = document.getElementById("login-btn");
+    const registerModal = document.getElementById("register-modal");
+    const loginModal = document.getElementById("login-modal");
+    const closeRegister = document.getElementById("close-register");
+    const closeLogin = document.getElementById("close-login");
+    const switchToLogin = document.getElementById("switch-to-login");
+    const switchToRegister = document.getElementById("switch-to-register");
+    
+    // Thêm input và nút đăng ký/đăng nhập
+    const registerSubmitBtn = document.querySelector("#register-modal button");
+    const loginSubmitBtn = document.querySelector("#login-modal button");
+    const registerInputs = document.querySelectorAll("#register-modal input");
+    const loginInputs = document.querySelectorAll("#login-modal input");
+
+    // Hàm hiển thị modal
+    function showModal(modal) {
+        modal.style.display = "flex";
+        setTimeout(() => modal.classList.add("show"), 10);
+    }
+
+    // Hàm ẩn modal
+    function hideModal(modal) {
+        modal.classList.remove("show");
+        setTimeout(() => modal.style.display = "none", 300);
+    }
+
+    // Kiểm tra dữ liệu nhập vào không được để trống
+    function validateInputs(inputs) {
+        for (let input of inputs) {
+            if (input.value.trim() === "") {
+                alert("Vui lòng điền đầy đủ thông tin!");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Mở form Đăng ký
+    registerBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        showModal(registerModal);
+    });
+
+    // Mở form Đăng nhập
+    loginBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        showModal(loginModal);
+    });
+
+    // Đóng form Đăng ký
+    closeRegister.addEventListener("click", function () {
+        hideModal(registerModal);
+    });
+
+    // Đóng form Đăng nhập
+    closeLogin.addEventListener("click", function () {
+        hideModal(loginModal);
+    });
+
+    // Chuyển từ Đăng ký -> Đăng nhập
+    switchToLogin.addEventListener("click", function (event) {
+        event.preventDefault();
+        hideModal(registerModal);
+        showModal(loginModal);
+    });
+
+    // Chuyển từ Đăng nhập -> Đăng ký
+    switchToRegister.addEventListener("click", function (event) {
+        event.preventDefault();
+        hideModal(loginModal);
+        showModal(registerModal);
+    });
+
+    // Xử lý đăng ký
+    registerSubmitBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (!validateInputs(registerInputs)) return;
+
+        alert("🎉 Đăng ký thành công!");
+        hideModal(registerModal);
+        showModal(loginModal); // Chuyển sang đăng nhập
+    });
+
+    // Xử lý đăng nhập
+    loginSubmitBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (!validateInputs(loginInputs)) return;
+
+        alert("✅ Đăng nhập thành công!");
+        hideModal(loginModal);
+    });
+
+    // Đóng modal khi click ra ngoài nội dung
+    window.addEventListener("click", function (event) {
+        if (event.target === registerModal) hideModal(registerModal);
+        if (event.target === loginModal) hideModal(loginModal);
+    });
+});
+
+        </script>
+        
+    </header>
+    <!-- Banner phim chính -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Phim Hot Nhất Hiện Nay</h1>
+            <p>Thưởng thức bộ phim tuyệt vời với chất lượng HD</p>
+            <button>Xem Ngay</button>
+        </div>
+    </section>
+
+    <!-- Danh sách phim -->
+    <section class="movies">
+        <h2>Phim Đề Cử</h2>
+        <div class="movie-slider">
+            <div class="movie-item">
+               
+                <img src="images/Anora.jpg" alt="Anora">
+                <div class="movie-popup">
+                    <video src="videos/anora.video.mp4" muted loop autoplay></video>
+                    <div class="movie-info">
+                        <h3>Anora</h3>
+                        <p>Thể loại: Drama</p>
+                        <p>Thời lượng: 120 phút</p>
+                        <p>Đạo diễn: Sean Baker</p>
+                    </div>+
+                </div>
+            </div>
+        
+            <div class="movie-item">
+                <img src="images/Conclave.jpg" alt="Conclave">
+                <div class="movie-popup">
+                    <video src="videos/Conclave Trailer.mp4" muted loop autoplay></video>
+                    <div class="movie-info">
+                        <h3>Conclave</h3>
+                        <p>Thể loại: Bí ẩn, Chính trị</p>
+                        <p>Thời lượng: 110 phút</p>
+                        <p>Đạo diễn: Edward Berger</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="movie-item">
+                <img src="images/A complete unknown.jpg" alt="A Complete Unknown">
+                <div class="movie-popup">
+                    <video src="videos/A Complete Unknown Trailer.mp4" muted loop autoplay></video>
+                    <div class="movie-info">
+                        <h3>A Complete Unknown</h3>
+                        <p>Thể loại: Tiểu sử, Âm nhạc</p>
+                        <p>Thời lượng: 130 phút</p>
+                        <p>Đạo diễn: James Mangold</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="movie-item">
+                <img src="images/EmilaPerez.jpg" alt="Emilia Pérez">
+                <div class="movie-popup">
+                    <video src="videos/Emila Perez Trailer.mp4" muted loop autoplay></video>
+                    <div class="movie-info">
+                        <h3>Emilia Pérez</h3>
+                        <p>Thể loại: Nhạc kịch, Hình sự</p>
+                        <p>Thời lượng: 125 phút</p>
+                        <p>Đạo diễn: Jacques Audiard</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="movie-item">
+                <img src="images/Gladiator 2.jpg" alt="Gladiator 2">
+                <div class="movie-popup">
+                    <video src="videos/Gladiator II Trailer.mp4" muted loop autoplay></video>
+                    <div class="movie-info">
+                        <h3>Gladiator 2</h3>
+                        <p>Thể loại: Hành động, Sử thi</p>
+                        <p>Thời lượng: 150 phút</p>
+                        <p>Đạo diễn: Ridley Scott</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="movie-item">
+                <img src="images/The Room Next Door.jpg" alt="The Room Next Door">
+                <div class="movie-popup">
+                    <video src="videos/The Room Next Door Trailer.mp4" muted loop autoplay></video>
+                    <div class="movie-info">
+                        <h3>The Room Next Door</h3>
+                        <p>Thể loại: Kinh dị, Tâm lý</p>
+                        <p>Thời lượng: 95 phút</p>
+                        <p>Đạo diễn: Keisuke Yoshida</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="movie-item">
+                <img src="images/TheBrutalist.jpg" alt="The Brutalist">
+                <div class="movie-popup">
+                    <video src="videos/The Brutalist Trailer.mp4" muted loop autoplay></video>
+                    <div class="movie-info">
+                        <h3>The Brutalist</h3>
+                        <p>Thể loại: Chính kịch</p>
+                        <p>Thời lượng: 120 phút</p>
+                        <p>Đạo diễn: Brady Corbet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+
+
+   
+    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Tìm kiếm phim...">
+        <button id="search-button">🔍</button>
+    </div>
+    
+    <footer><h1>Watch high-quality movies online for free anytime, anywhere.</h1></footer>
+
+</body>
+</div>
+</html>

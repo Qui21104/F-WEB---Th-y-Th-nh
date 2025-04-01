@@ -1,0 +1,439 @@
+@import url("style1.css");
+@import url("style2.css");
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+
+/* Thanh điều hướng */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    padding: 15px 50px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}
+
+/* 🔹 Căn chỉnh menu chính */
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+/* 🔹 Thêm hiệu ứng dropdown */
+.dropdown {
+    position: relative;
+}
+
+/* 🔹 Ẩn menu dropdown ban đầu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: black;
+    flex-direction: column;
+    min-width: 150px;
+    border-radius: 5px;
+    z-index: 10;
+    padding: 10px 0;
+    opacity: 0; /* 👀 Thêm opacity để tạo hiệu ứng */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    visibility: hidden;
+}
+
+/* 🔹 Khi hover vào "Thể Loại" -> dropdown hiện ra */
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 🔹 Style của từng mục trong dropdown */
+.dropdown-menu li {
+    padding: 10px 15px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.dropdown-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+/* 🔥 Hover đổi màu */
+.dropdown-menu li:hover {
+    background: red;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.profile-menu {
+    position: absolute;
+    right: 0;
+    top: 120%;
+    background: black;
+    list-style: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column; /* Xếp dọc các mục */
+}
+
+.profile-menu li {
+    padding: 5px 10px;
+    margin: 5px 0;
+    line-height: 1;
+    display: block;
+    text-align: left;
+    white-space: nowrap; /* Tránh bị xuống dòng lẻ khi nội dung dài */
+}
+.profile-menu li:hover{
+    background: red;
+}
+.profile-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.user-profile {
+    position: relative; /* Đảm bảo menu bám đúng vị trí */
+}
+
+.user-profile:hover .profile-menu {
+    opacity: 1;
+    visibility: visible;
+    display: flex; /* Hiện menu khi hover */
+}
+
+.user-profile img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+/* Banner phim chính */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('images/interstella.jpg') no-repeat center center/cover;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content {
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero-content button {
+    background: red;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+/* SLIDE PHIM CSS THUẦN */
+.movies {
+    padding: 0 1%;
+    
+    
+}
+.movies h2 {
+    text-align: center;
+    padding-left: 40px; /* Đẩy chữ vào 40px */
+    display: inline-block; /* Giữ kích thước theo chữ */
+}
+
+.movie-container {
+    display: flex;
+    justify-content: center; /* Căn giữa toàn bộ danh sách phim */
+    align-items: center;
+    flex-wrap: wrap; /* Đảm bảo các phim xuống dòng khi không đủ chỗ */
+    gap: 20px; /* Khoảng cách giữa các phim */
+    padding: 20px 50px; /* Căn lề hai bên */
+}
+
+.movie-slider {
+    display: flex;
+    flex-wrap: nowrap; /* Không cho phim xuống hàng */
+    gap: 10px; /* Giảm khoảng cách giữa các phim */
+    justify-content: center; /* Căn giữa danh sách phim */
+    max-width: 100%;
+    padding: 0 20px; /* Giảm padding để có thêm không gian */
+    overflow-x: auto;
+}
+
+
+
+.movie-slider img {
+    width: 200px;
+    border-radius: 5px;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
+    height: auto;
+    max-width: 160px;
+}
+
+.movie-slider img:hover {
+    transform: scale(1.1);
+}
+
+/* Ẩn thanh cuộn */
+.movie-container::-webkit-scrollbar {
+    display: none;
+}
+
+.movie-item {
+    width: 200px; /* Set kích thước đồng bộ */
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.movie-item img {
+    width: 100%; /* Đảm bảo ảnh rộng bằng container */
+    height: 100%; /* Giữ tỷ lệ ảnh */
+    object-fit: cover;
+    max-height: 300px; /* Giữ chiều cao đồng đều */
+}
+
+/* 🔥 KHUNG CHỨA VIDEO + THÔNG TIN 🔥 */
+.movie-popup {
+     position: absolute;
+    top: 0;
+    left: 100%;
+    width: 300px; /* Điều chỉnh kích thước phù hợp */
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none; /* Ban đầu ẩn */
+    
+}
+
+/* 🔥 Điều chỉnh nếu popup gần mép trái */
+.movie-item:first-child .movie-popup {
+    left: auto;
+    right: 0;
+    transform: none; /* Không căn giữa với poster nữa */
+}
+.movie-item:last-child .movie-popup {
+    left: auto;
+    right: 0;
+    transform: translateX(0); /* Giữ đúng vị trí nếu ở mép phải */
+}
+
+/* 🔹 Video trailer lớn hơn */
+.movie-popup video {
+    width: 100%;
+    height: 220px;
+    border-radius: 5px;
+    
+}
+
+/* 🔹 Nội dung phim */
+.movie-info {
+    width: 100%;
+    color: white;
+    text-align: left;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+/* 🔥 Hiện popup khi hover */
+.movie-item:hover .movie-popup {
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+
+/* Nội dung modal */
+.modal-content {
+    background: black;
+    padding: 20px;
+    width: 350px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+/* Nút đóng */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Style input và button */
+.modal-content input, .modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.modal-content button {
+    background: red;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background: darkred;
+}
+
+/* Hiển thị modal khi kích hoạt */
+.show {
+    display: flex !important;
+}
+
+.modal {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+
+/* Header */
+header {
+    background: black;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+    color: red;
+}
+
+/* Video Player */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+video {
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+}
+
+.search-container {
+    position: fixed; /* Cố định trên cùng */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    z-index: 1000; /* Hiển thị trên cùng */
+}
+
+.search-container input {
+    width: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid white;
+    outline: none;
+    font-size: 16px;
+    background: #222;
+    color: white;
+}
+
+.search-container button {
+    padding: 10px 15px;
+    margin-left: 5px;
+    border-radius: 20px;
+    border: none;
+    background: red;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-container button:hover {
+    background: darkred;
+}
+
+/* Đẩy navbar xuống để không bị che */
+.navbar {
+    margin-top: 50px;
+}
+
+.movie-title {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.container {
+    max-width: 1200px;  /* Giới hạn chiều rộng */
+    margin: 0 auto;      /* Căn giữa trang */
+    padding: 0 40px;     /* Tạo lề 40px hai bên */
+    width: 80%;
+}
+
+
+
+
